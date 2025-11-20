@@ -11,7 +11,7 @@ import { ChainType, FallbackProviderJsonConfig } from '@railgun-community/shared
 import { parseUnits } from 'ethers';
 import { AddressToTokenMap } from './models/config-models';
 import { GAS_TOKEN_DECIMALS } from './models/token-models';
-import { TokenAddressArbitrum, TokenAddressBSC, TokenAddressPolygonPOS } from './server/config/config-token-addresses';
+import { TokenAddressEthereum, TokenAddressArbitrum, TokenAddressBSC, TokenAddressPolygonPOS } from './server/config/config-token-addresses';
 
 // MAKE CHANGES IN myConfigOverrides() BELOW
 // MAKE CHANGES IN myConfigOverrides() BELOW
@@ -206,7 +206,10 @@ export const myConfigOverrides = () => {
   // Set other configs, for example:
   //
   configDefaults.debug.logLevel = DebugLevel.WarningsErrors;
-  //
+  
+  // waku node
+  // configDefaults.waku.rpcURL = 'http://nwaku1:8546';
+
   // REQUIRED FOR Running on EVM Networks with POI enabled.
   configDefaults.poi.nodeURL = ['https://ppoi-agg.horsewithsixlegs.xyz/'];
 
@@ -219,7 +222,7 @@ export const myConfigOverrides = () => {
   const ethereumProviders = createFallbackProviderConfig( 
     NetworkChainID.Ethereum, 
     [ 
-      'https://eth-mainnet.g.alchemy.com/v2/paYzNZ8yRPtpEtk5UgqflVgkMqLt1eK8', 
+      'https://eth-mainnet.g.alchemy.com/v2/y3PzijPMNd7oscpuwtcMxVXHnPZ5AjGB'
     ], 
   ); 
   setFallbackProviderConfigForNetworkEVM(NetworkChainID.Ethereum, ethereumProviders);
@@ -228,8 +231,8 @@ export const myConfigOverrides = () => {
   const bscProviders = createFallbackProviderConfig( 
     NetworkChainID.BNBChain, 
     [ 
-      'https://bsc-dataseed1.binance.org', 
-      'https://bsc-dataseed2.binance.org', 
+      // 'https://bsc-dataseed1.binance.org', 
+      // 'https://bsc-dataseed2.binance.org', 
       'https://bsc.publicnode.com', 
     ], 
   ); 
@@ -237,13 +240,13 @@ export const myConfigOverrides = () => {
 
 
   setTokensForNetworkEVM(NetworkChainID.Ethereum, { 
-    'NATIVE': { symbol: 'ETH' }, 
+    [TokenAddressEthereum.WETH]: { symbol: 'WETH' },
     '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48': { symbol: 'USDC' }, 
     '0xdAC17F958D2ee523a2206206994597C13D831ec7': { symbol: 'USDT' }, 
   }); 
 
   setTokensForNetworkEVM(NetworkChainID.BNBChain, { 
-    'NATIVE': { symbol: 'BNB' }, 
+    [TokenAddressBSC.WBNB]: { symbol: 'WBNB' },
     '0x55d398326f99059fF775485246999027B3197955': { symbol: 'USDT' }, 
     '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d': { symbol: 'USDC' }, 
   });
