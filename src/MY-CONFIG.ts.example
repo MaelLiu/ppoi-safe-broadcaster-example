@@ -222,7 +222,8 @@ export const myConfigOverrides = () => {
   const ethereumProviders = createFallbackProviderConfig( 
     NetworkChainID.Ethereum, 
     [ 
-      'https://eth-mainnet.g.alchemy.com/v2/y3PzijPMNd7oscpuwtcMxVXHnPZ5AjGB'
+      // 'https://eth-mainnet.g.alchemy.com/v2/y3PzijPMNd7oscpuwtcMxVXHnPZ5AjGB'
+      'https://eth-mainnet.g.alchemy.com/v2/paYzNZ8yRPtpEtk5UgqflVgkMqLt1eK8'
     ], 
   ); 
   setFallbackProviderConfigForNetworkEVM(NetworkChainID.Ethereum, ethereumProviders);
