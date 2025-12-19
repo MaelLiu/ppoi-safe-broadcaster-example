@@ -41,8 +41,10 @@ export const getMockNetwork = (): Network => {
       gasEstimateLimitToActualRatio: 1.25,
       profit: 0.07,
     },
-    proxyContract: '0x00',
-    relayAdaptContract: '0x00',
+    // proxyContract: '0x00',
+    // relayAdaptContract: '0x00',
+    proxyContract: NETWORK_CONFIG[NetworkName.Ethereum].proxyContract,
+    relayAdaptContract: NETWORK_CONFIG[NetworkName.Ethereum].relayAdaptContract,
     coingeckoNetworkId: CoingeckoNetworkID.Ethereum,
     fallbackProviderConfig: fallbackProvidersEthereum,
     deploymentBlock: 100,
@@ -104,9 +106,9 @@ export const getMockSerializedTransaction = (): string => {
   return JSON.stringify(getMockContractTransaction());
 };
 
-export const getMockTokenConfig = (): TokenConfig => {
+export const getMockTokenConfig = (symbol = 'SHIB'): TokenConfig => {
   return {
-    symbol: 'SHIB',
+    symbol,
   };
 };
 
